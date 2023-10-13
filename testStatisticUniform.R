@@ -46,9 +46,28 @@ testStatisticUniform1<-function(x,h){
   return(r)
 }
 
-testStatisticUniform<-function(x,h){
+testStatisticUniform2<-function(x,h){
   n=length(x)
-  r1=n*(n-1)*s3(h)
+  r=0
+  for (i in c(2:n)){
+    for (j in c(1:(i-1))){
+      r=r+s(x[i],x[j],h)
+    }
+  }
+  
+  r=2*r
+  for (i in c(1:n)){
+    r=r+1/h-2*s2(x[i],h)+s3(h)
+  }
+  
+  r=r/(n*(n-1))
+  
+  return(r)
+}
+
+testStatisticUniformU<-function(x,h){
+  n=length(x)
+  r1=n*(n-1)*s3(h)/2
     
   r2=0
   for (i in c(1:n)){
@@ -62,8 +81,49 @@ testStatisticUniform<-function(x,h){
     }
   }
   
-  r=r1-2*(n-1)*r2+r3
-  r=r/(2*n*(n-1))
+  r=r1-(n-1)*r2+r3
+  r=2*r/(n*(n-1))
   
   return(r)
+}
+
+fK<-function(x,h){
+  if (x<=-h/2){
+    return(0)
+  }
+  else if (x<=h/2){
+    return((x+h/2)/h) 
+  }
+  else if (x<=(1-h/2)){
+    return(1)
+  }
+  else if (x<=(1+h/2)){
+    return((1-x+h/2)/h)
+  }
+  else{
+    return(0)
+  }
+}
+
+K<-function(x,xi,h){
+  if (-h/2<=(x-xi)){
+    if((x-xi)<=h/2){
+      return(1/h)
+    }
+  }
+  return(0)
+}
+
+f<-function(x){
+  k1=K(x,x1,h)
+  k2=K(x,x2,h)
+  return(k1*k2)
+}
+
+vf <- function(x) {
+  if (is.vector(x)) {
+    return(sapply(x,f))
+  } else {
+    return(f(x))
+  }
 }
