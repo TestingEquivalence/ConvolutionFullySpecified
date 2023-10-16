@@ -2,13 +2,14 @@ source("testStatisticUniform.R")
 
 h=0.1
 
-# test s1 if Xi<>Xj
-x1=0
-x2=0.10
+# test s1 if Xi=Xj
+x1=1
 
 f<-function(x){
-  return(K(x,x1,h)*K(x,x2,h))
+  return(K(x,x1,h)*fK(x,h))
 }
+
+
 
 vf <- function(x) {
   if (is.vector(x)) {
@@ -18,6 +19,6 @@ vf <- function(x) {
   }
 }
 
-f(0.041)
-integrate(vf,x1-h,x2+h,subdivisions = 1000)
-s1(x1,x2,h)
+integrate(vf,x1-h/2,x1+h/2,subdivisions = 1000)
+s2(x1,h)
+

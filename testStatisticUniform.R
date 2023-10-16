@@ -4,8 +4,12 @@ s1<-function(x1,x2,h){
   return ((h-delta)/(h*h))
 }
 
+s11<-function(h){
+  return (1/h)
+}
+
 s2<-function(x,h){
-  if (x<=0){
+  if (x<0){
     return(0)
   }
   else if (x<h){
@@ -16,7 +20,7 @@ s2<-function(x,h){
   else if (x<(1-h)){
     return (1)
   }
-  else if (x<1){
+  else if (x<=1){
     r=1-x+h/2-((1-x)^2)/(2*h) 
     r=r/h
     return(r)
@@ -27,7 +31,7 @@ s2<-function(x,h){
 }
 
 s3<-function(h){
-  return(h/3)
+  return(1-h/3)
 }
 
 s<-function(x1,x2,h){
@@ -48,16 +52,10 @@ testStatisticUniform1<-function(x,h){
 
 testStatisticUniform2<-function(x,h){
   n=length(x)
-  r=0
-  for (i in c(2:n)){
-    for (j in c(1:(i-1))){
-      r=r+s(x[i],x[j],h)
-    }
-  }
+  r=testStatisticUniform1(x,h)*n*(n-1)
   
-  r=2*r
   for (i in c(1:n)){
-    r=r+1/h-2*s2(x[i],h)+s3(h)
+    r=r+s11(h)-2*s2(x[i],h)+s3(h)
   }
   
   r=r/(n*(n-1))
@@ -114,16 +112,12 @@ K<-function(x,xi,h){
   return(0)
 }
 
-f<-function(x){
-  k1=K(x,x1,h)
-  k2=K(x,x2,h)
-  return(k1*k2)
+fn<-function(x,h,vx){
+  n=length(vx)
+  r=0
+  for(e in vx){
+    r=r+K(x,e,h)
+  }
+  return(r/n)
 }
 
-vf <- function(x) {
-  if (is.vector(x)) {
-    return(sapply(x,f))
-  } else {
-    return(f(x))
-  }
-}
