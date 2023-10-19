@@ -121,3 +121,31 @@ fn<-function(x,h,vx){
   return(r/n)
 }
 
+testStatisticUniformFull<-function(x,h){
+  n=length(x)
+  r1=n*(n-1)*s3(h)/2
+  
+  r2=0
+  for (i in c(1:n)){
+    r2=r2+s2(x[i],h)
+  }
+  
+  r3=0
+  for (i in c(2:n)){
+    for (j in c(1:(i-1))){
+      r3=r3+s1(x[i],x[j],h)
+    }
+  }
+  
+  r=r1-(n-1)*r2+r3
+  r=2*r
+  
+  for (i in c(1:n)){
+    r=r+s11(h)-2*s2(x[i],h)+s3(h)
+  }
+  
+  r=r/(n*(n-1))
+  
+  return(r)
+}
+

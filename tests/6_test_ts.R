@@ -22,5 +22,6 @@ vf <- function(x) {
   }
 }
 
-integrate(vf,-h-2,1+h+2, subdivisions = 1000000)
+integrate(vf,-h,1+h, subdivisions = 100000)
 testStatisticUniform2(vx,h)
+testStatisticUniformFull(vx,h)
