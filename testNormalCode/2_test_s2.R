@@ -1,14 +1,15 @@
 source("testStatisticNormal.R")
 
-sigma=1
+sigma=2
 
-# test s1 if 
+# test s1 if Xi=Xj
 x1=0
-x2=1
 
 f<-function(x){
-  return(K(x,x1,sigma)*K(x,x2,sigma))
+  return(K(x,x1,sigma)*fK(x,sigma))
 }
+
+
 
 vf <- function(x) {
   if (is.vector(x)) {
@@ -18,6 +19,6 @@ vf <- function(x) {
   }
 }
 
-integrate(vf,x1-3*sigma,x2+3*sigma,subdivisions = 10000)
-s1(x1,x2,sigma)
- 
+integrate(vf,x1-3*sigma,x1+3*sigma,subdivisions = 1000)
+s2(x1,sigma)
+
