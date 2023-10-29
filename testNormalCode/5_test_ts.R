@@ -1,15 +1,15 @@
-source("testStatisticUniform.R")
+source("testStatisticNormal.R")
 
-h=0.1
+sigma=1
 
-vx=runif(100)
+vx=rnorm(100)
 
-testStatisticUniformU(vx,h)
-testStatisticUniform1(vx,h)
-testStatisticUniform2(vx,h)
+testStatisticNormalU(vx,sigma)
+testStatisticNormal1(vx,sigma)
+
 
 f<-function(x){
-  return((fn(x,h, vx)-fK(x,h))^2)
+  return((fn(x,sigma,vx)-fK(x,sigma))^2)
 }
 
 
@@ -22,6 +22,6 @@ vf <- function(x) {
   }
 }
 
-integrate(vf,-h,1+h, subdivisions = 100000)
-testStatisticUniform2(vx,h)
-testStatisticUniformFull(vx,h)
+integrate(vf,-3*(1+sigma),3*(1+sigma), subdivisions = 100000)
+testStatisticNormal2(vx,sigma)
+testStatisticNormalFull(vx,sigma)

@@ -20,7 +20,7 @@ s<-function(x1,x2,sigma){
   return(s1(x1,x2,sigma)-s2(x1,sigma)-s2(x2,sigma)+s3(sigma))
 }
 
-testStatisticUniform1<-function(x,sigma){
+testStatisticNormal1<-function(x,sigma){
   n=length(x)
   r=0
   for (i in c(2:n)){
@@ -32,9 +32,9 @@ testStatisticUniform1<-function(x,sigma){
   return(r)
 }
 
-testStatisticUniform2<-function(x,sigma){
+testStatisticNormal2<-function(x,sigma){
   n=length(x)
-  r=testStatisticUniform1(x,h)*n*(n-1)
+  r=testStatisticNormal1(x,sigma)*n*(n-1)
   
   for (i in c(1:n)){
     r=r+s1(x[i],x[i],sigma)-2*s2(x[i],sigma)+s3(sigma)
@@ -45,7 +45,7 @@ testStatisticUniform2<-function(x,sigma){
   return(r)
 }
 
-testStatisticUniformU<-function(x,sigma){
+testStatisticNormalU<-function(x,sigma){
   n=length(x)
   r1=n*(n-1)*s3(sigma)/2
     
@@ -85,7 +85,7 @@ fn<-function(x,sigma,vx){
   return(r/n)
 }
 
-testStatisticUniformFull<-function(x,sigma){
+testStatisticNormalFull<-function(x,sigma){
   n=length(x)
   r1=n*(n-1)*s3(sigma)/2
   
@@ -105,7 +105,7 @@ testStatisticUniformFull<-function(x,sigma){
   r=2*r
   
   for (i in c(1:n)){
-    r=r+s11(sigma)-2*s2(x[i],sigma)+s3(sigma)
+    r=r+s1(x[i],x[i],sigma)-2*s2(x[i],sigma)+s3(sigma)
   }
   
   r=r/(n*(n-1))
