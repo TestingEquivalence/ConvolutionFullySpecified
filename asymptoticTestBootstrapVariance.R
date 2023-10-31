@@ -23,8 +23,8 @@ asymptoticTestBootstrapVariance<-function(parameter){
   p=parameter
 
   vol = bootstrapSD(parameter)
-  qt=qnorm(1-alpha,0,1)
-  dst=p$f(nx,p$h)
+  qt=qnorm(1-p$alpha,0,1)
+  dst=p$f(p$x,p$h)
 
   min_eps = dst+ qt*vol
   return(min_eps)
