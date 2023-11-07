@@ -1,7 +1,7 @@
 source("testStatisticNormal.R")
 
-sigma=0.05
-xi=0
+sigma=0.1
+xi=-1
 
 f<-function(x){
   return((K(x,xi,sigma)-fK(x,sigma))^2)

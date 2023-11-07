@@ -1,6 +1,6 @@
 source("testStatisticNormal.R")
 
-sigma=1
+sigma=0.1
 
 vx=rnorm(100)
 

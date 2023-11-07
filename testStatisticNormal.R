@@ -1,7 +1,7 @@
 s1<-function(x1,x2,sigma){
   s=2*sigma*sigma
   s=sqrt(s)
-  return(dnorm(0,x1+x2,s))
+  return(dnorm(x1,x2,s))
 }
 
 s2<-function(x,sigma){
@@ -87,29 +87,15 @@ fn<-function(x,sigma,vx){
 
 testStatisticNormalFull<-function(x,sigma){
   n=length(x)
-  r1=n*(n-1)*s3(sigma)/2
+  r1=testStatisticNormalU(x,sigma)
   
   r2=0
   for (i in c(1:n)){
-    r2=r2+s2(x[i],sigma)
+    r2=r2+s1(x[i],x[i],sigma)-2*s2(x[i],sigma)+s3(sigma)
   }
   
-  r3=0
-  for (i in c(2:n)){
-    for (j in c(1:(i-1))){
-      r3=r3+s1(x[i],x[j],sigma)
-    }
-  }
+  r2=r2/(n*(n-1))
   
-  r=r1-(n-1)*r2+r3
-  r=2*r
-  
-  for (i in c(1:n)){
-    r=r+s1(x[i],x[i],sigma)-2*s2(x[i],sigma)+s3(sigma)
-  }
-  
-  r=r/(n*(n-1))
-  
-  return(r)
+  return(r1+r2)
 }
 

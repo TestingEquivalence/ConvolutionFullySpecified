@@ -1,9 +1,9 @@
 source("testStatisticNormal.R")
 
-sigma=2
+sigma=0.5
 
 # test s1 if Xi=Xj
-x1=0
+x1=3
 
 f<-function(x){
   return(K(x,x1,sigma)*fK(x,sigma))

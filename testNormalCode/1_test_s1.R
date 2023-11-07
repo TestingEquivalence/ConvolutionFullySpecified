@@ -3,8 +3,8 @@ source("testStatisticNormal.R")
 sigma=1
 
 # test s1 if 
-x1=0
-x2=1
+x1=1
+x2=4
 
 f<-function(x){
   return(K(x,x1,sigma)*K(x,x2,sigma))
