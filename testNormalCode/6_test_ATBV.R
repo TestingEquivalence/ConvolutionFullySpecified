@@ -9,10 +9,11 @@ parameter$h=0.1
 parameter$nSimulation=1000
 parameter$f=testStatisticNormalU
 
-# bootstrapSD(parameter)
+# U statistic
 testStatisticNormalU(parameter$x,parameter$h)
 asymptoticTestBootstrapVariance(parameter)
 
+# full statistic
 parameter$f=testStatisticNormalFull
 testStatisticNormalFull(parameter$x,parameter$h)
 asymptoticTestBootstrapVariance(parameter)

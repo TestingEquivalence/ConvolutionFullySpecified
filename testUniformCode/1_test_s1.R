@@ -4,7 +4,7 @@ h=0.1
 
 # test s1 if Xi<>Xj
 x1=0
-x2=0.10
+x2=0.5
 
 f<-function(x){
   return(K(x,x1,h)*K(x,x2,h))

@@ -1,15 +1,15 @@
-source("testStatisticUniform.R")
+source("testStatisticNormal.R")
 source("BootstrapTestTPercentile.R")
 
 parameter=list()
 parameter$alpha=0.05
 set.seed(10071977)
-parameter$x=runif(100)
-parameter$h=0.2
-parameter$nSimPercentileTBootstrap=1000
-parameter$f=testStatisticUniformU
+parameter$x=rnorm(100)
+parameter$h=0.3
+
 
 # U statistic
+parameter$f=testStatisticNormalU
 parameter$nSimulation=200
 asymptoticTestBootstrapVariance(parameter)
 
@@ -19,7 +19,7 @@ tPercentileBootstrapTest(parameter)
 
 
 # full statistic
-parameter$f=testStatisticUniformFull
+parameter$f=testStatisticNormalFull
 parameter$nSimulation=200
 asymptoticTestBootstrapVariance(parameter)
 
