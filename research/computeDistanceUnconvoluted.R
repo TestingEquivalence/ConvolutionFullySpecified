@@ -1,7 +1,5 @@
 source("testStatisticUniform.R")
 
-h=0.1
-
 f<-function(x){
   return((fU(x)-fK(x,h))^2)
 }
@@ -22,6 +20,6 @@ dst<-function(h){
   
 }
 
-h=0.3
+h=0.01
 dst(h)
  
