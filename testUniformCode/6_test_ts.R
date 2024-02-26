@@ -2,7 +2,7 @@ source("testStatisticUniform.R")
 
 h=0.1
 
-vx=runif(100)
+vx=runif(100000)
 
 testStatisticUniformU(vx,h)
 testStatisticUniform1(vx,h)
@@ -23,5 +23,6 @@ vf <- function(x) {
 }
 
 integrate(vf,-h,1+h, subdivisions = 100000)
-testStatisticUniform2(vx,h)
+# testStatisticUniform2(vx,h)
 testStatisticUniformFull(vx,h)
+testStatisticUniformU(vx,h)

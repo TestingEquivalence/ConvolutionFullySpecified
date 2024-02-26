@@ -1,5 +1,5 @@
 
-simulatePowerAtUniform<-function(test, sampleSize, nSimulation,orderName="temp"){
+simulatePowerAtPoint<-function(test, sampleSize, nSimulation,rDistr,orderName="temp"){
   #prepare
   if(!dir.exists(orderName)){
     dir.create(orderName)
@@ -9,7 +9,7 @@ simulatePowerAtUniform<-function(test, sampleSize, nSimulation,orderName="temp")
   set.seed(10071977)
   sim=list()
   for (i in c(1:nSimulation)){
-    sim[[i]]=runif(sampleSize)
+    sim[[i]]=rDistr(sampleSize)
   }
   
   res=rep(0,nSimulation)

@@ -20,6 +20,6 @@ dst<-function(h){
   
 }
 
-h=0.01
+h=0.33
 dst(h)
  
