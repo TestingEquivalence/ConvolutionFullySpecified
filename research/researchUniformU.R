@@ -35,12 +35,12 @@ lrdg=listRDG()
 
 parameter=list()
 parameter$alpha=0.05
-parameter$h=0.35
+parameter$h=0.36
 parameter$nSimulation=1000
 parameter$f=testStatisticUniformU
 
 rf=lrdg[[1]]
-parameter$x=rf(100000)
+parameter$x=rf(10000)
 h=0.36
 tic("start U")
 testStatisticUniformU(parameter$x, h)
