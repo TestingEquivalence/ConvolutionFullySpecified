@@ -4,30 +4,33 @@ source("simulation/size.R")
 source("simulation/power.R")
 source("distributions/alternatives.R")
 source("distributions/mixedDistribution.R")
-
 library(tictoc)
 
 
 # study the test power at the uniform distribution on [0,1]
 sampleSize=100
-h=0.34
+vh=seq(0.1,1, by=0.1)
+resPower=list()
 
-parameter=list()
-parameter$alpha=0.05
-parameter$h=h
-parameter$nSimulation=1000
-parameter$f=testStatisticUniformU
-
-test<-function(x){
-  parameter$x=x
-  tres=asymptoticTestBootstrapVariance(parameter)
-  return(tres$min_eps)
+for (h in vh){
+  parameter=list()
+  parameter$alpha=0.05
+  parameter$h=h
+  parameter$nSimulation=200
+  parameter$f=testStatisticUniformU
+  
+  test<-function(x){
+    parameter$x=x
+    tres=asymptoticTestBootstrapVariance(parameter)
+    return(tres$min_eps)
+  }
+  
+  # simulate power at uniform distribution
+  
+  resPower[[paste0("h",h)]]=simulatePowerAtPoint(test, sampleSize, nSimulation = 1000, rDistr = runif)
 }
 
-# simulate power at uniform distribution
-
-res=simulatePowerAtPoint(test, sampleSize, nSimulation = 1000, rDistr = runif)
-write.csv(res,"size.csv")
+write.csv(resPower,"resPower_ATBV_200.csv")
 
 # simulate power at boundary point
 
