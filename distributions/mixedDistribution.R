@@ -17,10 +17,15 @@ rMixed<-function(n,w,rf,rg){
 
 boundaryPoint<-function(epsilon,rf, rg, n, distFun){
   f<-function(w){
+    set.seed(10071977)
+    vdst=c()
     
-    x= rMixed(n, w, rf, rg)
-
-    dst=distFun(x)
+    for (i in c(1:100)){
+      x= rMixed(n, w, rf, rg)
+      vdst=c(vdst,distFun(x))
+    }
+      
+    dst=mean(vdst)
     return(dst-epsilon)
   }
   

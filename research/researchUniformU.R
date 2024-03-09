@@ -38,14 +38,22 @@ lrdg=listRDG()
 
 parameter=list()
 parameter$alpha=0.05
-parameter$h=0.36
+parameter$h=0.35
 parameter$nSimulation=1000
 parameter$f=testStatisticUniformU
 
 rf=lrdg[[1]]
-parameter$x=rf(10000)
-h=0.36
-tic("start U")
-testStatisticUniformU(parameter$x, h)
-toc()
+h=0.35
+vdst=c()
+# tic("start U")
+
+for (i in c(1:100)){
+  parameter$x=rf(10000)
+  vdst=c(vdst,testStatisticUniformU(parameter$x, h))
+}
+mean(vdst)
+sd(vdst)
+# toc()
 #testStatisticUniformFull(parameter$x,h)
+
+
