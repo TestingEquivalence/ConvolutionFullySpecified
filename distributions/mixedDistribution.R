@@ -1,34 +1,35 @@
 
-dMixed<-function(x,w,f,g){
-  return(w*f(x)+(1-w)*g(x))
-}
-
-pMixed<-function(x,w,H,G){
-  return(w*H(x)+(1-w)*G(x))
-}
-
 rMixed<-function(n,w,rf,rg){
   vw=rbinom(n=n, size=1,prob=w)
   vf=rf(n)
   vg=rg(n)
-  res=vw*vf+(1-vw)*vf
+  res=vw*vf+(1-vw)*vg
   return(res)
 }
 
-boundaryPoint<-function(epsilon,rf, rg, n, distFun){
-  f<-function(w){
-    set.seed(10071977)
-    vdst=c()
-    
-    for (i in c(1:100)){
-      x= rMixed(n, w, rf, rg)
-      vdst=c(vdst,distFun(x))
-    }
-      
-    dst=mean(vdst)
-    return(dst-epsilon)
+boundaryPoint<-function(epsilon,rf, distFun){
+  vdst=c()
+  set.seed(10071977)
+  dst=distFun(rf) 
+  w=epsilon/dst
+  w=sqrt(w)
+  
+  fMixed<-function(n){
+    return(rMixed(n,w,rf, runif))
   }
   
-  res=uniroot(f,c(0,1))
-  return(res$root)
+  res=list()
+  res$w=w
+  res$fMixed=fMixed
+  
+  return(res)
+}
+
+distFunU<-function(rf,h,n){
+  vdst=c()
+  for (j in c(1:100)){
+    x=rf(n)
+    vdst=c(vdst,testStatisticUniformU(x, h))
+  }
+  return(vdst)
 }

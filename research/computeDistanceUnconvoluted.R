@@ -17,7 +17,7 @@ dst<-function(h){
   
 }
 
-vh=seq(0.1,1, by=0.1)
+vh=seq(0.3,0.4, by=0.01)
 vdst=sapply(vh,dst)
 res=data.frame(h=vh,dst=vdst)
 write.csv(res,"dstUnconvoluted.csv")
